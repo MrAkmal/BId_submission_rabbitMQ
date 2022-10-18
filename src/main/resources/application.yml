@@ -21,6 +21,18 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQL91Dialect
 
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+
+
+rabbitmq:
+  exchange: rabbit.exchange
+  queue: rabbit.queue
+  routingkey: rabbit.routingkey
 
 
 
@@ -28,3 +40,5 @@ spring:
 springdoc:
   swagger-ui:
     path: /swagger-ui
+
+

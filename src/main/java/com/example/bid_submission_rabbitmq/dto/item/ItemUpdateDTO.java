@@ -2,6 +2,8 @@ package com.example.bid_submission_rabbitmq.dto.item;
 
 import lombok.*;
 
+import javax.validation.constraints.NotNull;
+
 @Getter
 
 @Setter
@@ -10,6 +12,7 @@ import lombok.*;
 @Builder
 public class ItemUpdateDTO {
 
+    @NotNull
     private Long id;
 
     private String name;

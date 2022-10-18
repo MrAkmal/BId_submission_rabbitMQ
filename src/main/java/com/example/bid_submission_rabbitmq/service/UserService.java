@@ -22,7 +22,7 @@ public class UserService {
         return repository.findById(userId).filter(user -> user.getRole().equals("ROLE_AGENCY_USER")).isPresent();
     }
 
-    public User findById(Long userId){
+    public User findById(Long userId) {
 
         Optional<User> optionalUser = repository.findById(userId);
 

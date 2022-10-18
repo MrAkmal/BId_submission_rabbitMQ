@@ -19,6 +19,7 @@ public class TenderController {
 
     private final TenderService service;
 
+
     @Autowired
     public TenderController(TenderService service) {
         this.service = service;
@@ -51,6 +52,5 @@ public class TenderController {
     public ResponseEntity<ResponseData<Void>> delete(@PathVariable Long tenderId, @RequestParam("userId") Long userId) {
         return service.delete(tenderId, userId);
     }
-
 
 }
