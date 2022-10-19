@@ -20,7 +20,6 @@ public class RabbitMQProducer {
         this.rabbitMQConfig = rabbitMQConfig;
     }
 
-
     public void send(RabbitDTO dto) {
         rabbitTemplate.convertAndSend(rabbitMQConfig.exchange, rabbitMQConfig.routingKey, dto);
     }
