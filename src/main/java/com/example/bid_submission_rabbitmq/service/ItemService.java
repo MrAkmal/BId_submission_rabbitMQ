@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -86,7 +87,8 @@ public class ItemService {
 
         Optional<Item> optionalItem = repository.findByNameAndDescriptionAndTenderForm(item.getName(), item.getDescription(), item.getTenderForm());
 
-        if (optionalItem.isPresent()) throw new RuntimeException("Item already exists");
+        if (optionalItem.isPresent() && !Objects.equals(optionalItem.get().getId(), item.getId()))
+            throw new RuntimeException("Item already exists");
 
         repository.save(item);
 
@@ -101,7 +103,7 @@ public class ItemService {
 
         repository.deleteById(itemId);
 
-        return new ResponseEntity<>(new ResponseData<>(null, "Successfully deleted"), HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(new ResponseData<>(null, "Successfully deleted"), HttpStatus.OK);
 
     }
 
@@ -149,4 +151,37 @@ public class ItemService {
 
     }
 
+    public ResponseEntity<ResponseData<List<ItemDTO>>> getAllByTenderFormId(Long userId, Long tenderFormId) {
+
+        tenderFormService.findByTenderFormId(tenderFormId);
+
+        List<ItemDTO> items = repository.findAllByTenderFormId(tenderFormId);
+
+        return new ResponseEntity<>(new ResponseData<>(items, "Success"), HttpStatus.OK);
+
+    }
+
+    public Item findByItemId(Long itemId) {
+
+        Optional<Item> optionalItem = repository.findById(itemId);
+
+        if (optionalItem.isEmpty()) throw new RuntimeException("Item not found");
+
+        return optionalItem.get();
+
+    }
+
+    public ResponseEntity<ResponseData<List<ItemRateDetailDTO>>> getItemRateByItemId(Long itemId, Long userId) {
+
+        findByItemId(itemId);
+
+        List<ItemRateDetailDTO> itemRateDetailDTOS = itemRateService.findByItemId(itemId);
+
+        if (!userService.isAgencyUser(userId)) {
+            itemRateDetailDTOS = repository.findByItemIdAndUserId(itemId, userId);
+        }
+
+        return new ResponseEntity<>(new ResponseData<>(itemRateDetailDTOS, "Success"), HttpStatus.OK);
+
+    }
 }

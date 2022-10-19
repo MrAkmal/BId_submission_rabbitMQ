@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/tender-form")
+@RequestMapping("/v1/tender_form")
+@CrossOrigin("*")
 public class TenderFormController {
 
     private final TenderFormService service;
@@ -48,6 +49,11 @@ public class TenderFormController {
     @DeleteMapping("/{tenderFormId}")
     public ResponseEntity<ResponseData<Void>> delete(@PathVariable Long tenderFormId, @RequestParam("userId") Long userId) {
         return service.delete(tenderFormId, userId);
+    }
+
+    @GetMapping("/tender/{tenderId}")
+    public ResponseEntity<ResponseData<List<TenderFormDTO>>> getAllByTenderId(@PathVariable Long tenderId) {
+        return service.getAllByTenderId(tenderId);
     }
 
 

@@ -113,4 +113,7 @@ public class TenderFormService {
     }
 
 
+    public ResponseEntity<ResponseData<List<TenderFormDTO>>> getAllByTenderId(Long tenderId) {
+        return new ResponseEntity<>(new ResponseData<>(repository.getAllByTenderId(tenderId), "Success"), HttpStatus.OK);
+    }
 }
