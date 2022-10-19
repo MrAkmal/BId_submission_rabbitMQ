@@ -1,12 +1,14 @@
 package com.example.bid_submission_rabbitmq.service;
 
 import com.example.bid_submission_rabbitmq.dto.item.ItemRateDTO;
+import com.example.bid_submission_rabbitmq.dto.item.ItemRateDetailDTO;
 import com.example.bid_submission_rabbitmq.entity.ItemRate;
 import com.example.bid_submission_rabbitmq.repository.ItemRateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -35,5 +37,7 @@ public class ItemRateService {
         return repository.sumUpRate(bidderId, tenderId);
     }
 
-
+    public List<ItemRateDetailDTO> findByItemId(Long itemId) {
+        return repository.findByItemId(itemId);
+    }
 }

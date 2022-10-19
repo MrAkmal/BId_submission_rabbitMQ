@@ -23,4 +23,7 @@ public interface TenderFormRepository extends JpaRepository<TenderForm, Long> {
 
     @Query("select new com.example.bid_submission_rabbitmq.dto.tenderform.TenderFormDTO(t.id,t.name) from TenderForm t  where t.id = :tenderFormId")
     Optional<TenderFormDTO> get(Long tenderFormId);
+
+    @Query("select new com.example.bid_submission_rabbitmq.dto.tenderform.TenderFormDTO(t.id,t.name) from TenderForm t where t.tender.id= :tenderId")
+    List<TenderFormDTO> getAllByTenderId(Long tenderId);
 }

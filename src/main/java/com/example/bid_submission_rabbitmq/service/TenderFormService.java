@@ -97,7 +97,7 @@ public class TenderFormService {
 
         repository.deleteById(tenderFormId);
 
-        return new ResponseEntity<>(new ResponseData<>(null, "Successfully deleted"), HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(new ResponseData<>(null, "Successfully deleted"), HttpStatus.OK);
 
     }
 
@@ -113,4 +113,7 @@ public class TenderFormService {
     }
 
 
+    public ResponseEntity<ResponseData<List<TenderFormDTO>>> getAllByTenderId(Long tenderId) {
+        return new ResponseEntity<>(new ResponseData<>(repository.getAllByTenderId(tenderId), "Success"), HttpStatus.OK);
+    }
 }

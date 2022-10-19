@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/v1/item")
+@CrossOrigin("*")
 public class ItemController {
 
     private final ItemService service;
@@ -39,7 +40,7 @@ public class ItemController {
 
 
     @PutMapping
-    public ResponseEntity<ResponseData<ItemDTO>> update(@RequestParam ItemUpdateDTO dto, @RequestParam("userId") Long userId) {
+    public ResponseEntity<ResponseData<ItemDTO>> update(@RequestBody ItemUpdateDTO dto, @RequestParam("userId") Long userId) {
         return service.update(dto, userId);
     }
 
@@ -64,6 +65,16 @@ public class ItemController {
     @PostMapping("/rate/sum-up/{tenderId}")
     public ResponseEntity<ResponseData<Void>> sumUpRate(@PathVariable Long tenderId, @RequestParam("userId") Long userId) {
         return service.sumUpTotalRate(userId, tenderId);
+    }
+
+    @GetMapping("/tender_form/{tenderFormId}")
+    public ResponseEntity<ResponseData<List<ItemDTO>>> getAllByTenderFormId(@PathVariable Long tenderFormId, @RequestParam("userId") Long userId) {
+        return service.getAllByTenderFormId(userId, tenderFormId);
+    }
+
+    @GetMapping("/item_rate/{itemId}")
+    public ResponseEntity<ResponseData<List<ItemRateDetailDTO>>> getItemRateByItemId(@PathVariable Long itemId, @RequestParam(name = "userId") Long userId) {
+        return service.getItemRateByItemId(itemId, userId);
     }
 
 }
