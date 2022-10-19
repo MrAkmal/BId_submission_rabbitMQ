@@ -42,7 +42,7 @@ public class TenderFormController {
 
 
     @PutMapping
-    public ResponseEntity<ResponseData<TenderFormDTO>> update(@RequestParam TenderFormUpdateDTO dto, @RequestParam("userId") Long userId) {
+    public ResponseEntity<ResponseData<TenderFormDTO>> update(@RequestBody TenderFormUpdateDTO dto, @RequestParam("userId") Long userId) {
         return service.update(dto, userId);
     }
 
