@@ -2,14 +2,15 @@ package com.example.bid_submission_rabbitmq.controller;
 
 import com.example.bid_submission_rabbitmq.dto.LoginDTO;
 import com.example.bid_submission_rabbitmq.dto.ResponseData;
+import com.example.bid_submission_rabbitmq.entity.User;
 import com.example.bid_submission_rabbitmq.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/v1/auth")
+@CrossOrigin("*")
 public class UserController {
 
 
@@ -23,7 +24,7 @@ public class UserController {
 
 
     @PostMapping("/login")
-    public ResponseEntity<ResponseData<Void>> login(@RequestBody LoginDTO dto) {
+    public ResponseEntity<ResponseData<User>> login(@RequestBody LoginDTO dto) {
         return service.login(dto);
     }
 

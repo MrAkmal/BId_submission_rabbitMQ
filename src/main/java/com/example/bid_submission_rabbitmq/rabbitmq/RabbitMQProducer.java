@@ -3,6 +3,8 @@ package com.example.bid_submission_rabbitmq.rabbitmq;
 
 import com.example.bid_submission_rabbitmq.dto.RabbitDTO;
 import org.springframework.amqp.core.AmqpTemplate;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +22,14 @@ public class RabbitMQProducer {
         this.rabbitMQConfig = rabbitMQConfig;
     }
 
+
     public void send(RabbitDTO dto) {
         rabbitTemplate.convertAndSend(rabbitMQConfig.exchange, rabbitMQConfig.routingKey, dto);
+    }
+
+    public void receiveMessage(){
+        Message receive = rabbitTemplate.receive();
+        System.out.println("receive = " + receive);
     }
 
 }

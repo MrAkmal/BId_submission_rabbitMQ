@@ -36,12 +36,12 @@ public class UserService {
     }
 
 
-    public ResponseEntity<ResponseData<Void>> login(LoginDTO dto) {
+    public ResponseEntity<ResponseData<User>> login(LoginDTO dto) {
 
         Optional<User> optionalUser = repository.findByName(dto.getName());
 
         if (optionalUser.isEmpty()) throw new RuntimeException("Wrong username");
 
-        return new ResponseEntity<>(new ResponseData<>(null, "Successfully logged in"), HttpStatus.OK);
+        return new ResponseEntity<>(new ResponseData<>(optionalUser.get(), "Successfully logged in"), HttpStatus.OK);
     }
 }
