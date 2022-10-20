@@ -78,7 +78,7 @@ public class TenderService {
 
         repository.deleteById(tenderId);
 
-        return new ResponseEntity<>(new ResponseData<>(null, "Successfully Deleted"), HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(new ResponseData<>(null, "Successfully Deleted"), HttpStatus.OK);
     }
 
 
