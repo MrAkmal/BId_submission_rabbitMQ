@@ -19,6 +19,6 @@ public class RabbitDTO {
 
     private Long tenderId;
 
-    private LocalDateTime submissionDateTime;
+    private String submissionDateTime;
 
 }

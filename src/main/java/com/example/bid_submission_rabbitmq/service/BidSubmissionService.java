@@ -9,6 +9,7 @@ import com.example.bid_submission_rabbitmq.repository.BidSubmissionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 @Service
@@ -37,7 +38,7 @@ public class BidSubmissionService {
 
         repository.save(mapper.fromDTO(dto));
 
-        rabbitMQProducer.send(new RabbitDTO(dto.getTotalRate(), dto.getUser().getId(), dto.getTender().getId(),dto.getSubmissionDateTime()));
+        rabbitMQProducer.send(new RabbitDTO(dto.getTotalRate(), dto.getUser().getId(), dto.getTender().getId(),dto.getSubmissionDateTime().format(DateTimeFormatter.ISO_DATE_TIME)));
 
     }
 }
