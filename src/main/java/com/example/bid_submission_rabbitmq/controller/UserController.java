@@ -5,6 +5,7 @@ import com.example.bid_submission_rabbitmq.dto.ResponseData;
 import com.example.bid_submission_rabbitmq.entity.User;
 import com.example.bid_submission_rabbitmq.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,6 +27,11 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<ResponseData<User>> login(@RequestBody LoginDTO dto) {
         return service.login(dto);
+    }
+
+    @GetMapping("/{userId}")
+    public ResponseEntity<ResponseData<User>> get(@PathVariable Long userId) {
+            return new ResponseEntity<>(new ResponseData<>(service.findById(userId), "success"), HttpStatus.OK);
     }
 
 
