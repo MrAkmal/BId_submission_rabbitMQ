@@ -4,6 +4,7 @@ package com.example.bid_submission_rabbitmq.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -21,6 +22,14 @@ public class Tender {
 
     @Column(nullable = false)
     private String description;
+
+
+    @OneToMany(mappedBy = "tender", cascade = CascadeType.ALL)
+    private List<TenderForm> tenderForms;
+
+
+    @OneToMany(mappedBy = "tender", cascade = CascadeType.ALL)
+    private List<BidSubmission> bidSubmissions;
 
 
 }

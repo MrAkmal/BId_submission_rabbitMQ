@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Getter
 @Setter
@@ -32,4 +33,7 @@ public class Item {
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private TenderForm tenderForm;
 
+
+    @OneToMany(mappedBy = "item",cascade = CascadeType.ALL)
+    private List<ItemRate> itemRates;
 }

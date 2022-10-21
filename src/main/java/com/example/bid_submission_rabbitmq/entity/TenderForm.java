@@ -3,6 +3,7 @@ package com.example.bid_submission_rabbitmq.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -23,5 +24,8 @@ public class TenderForm {
     @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     private Tender tender;
 
+
+    @OneToMany(mappedBy = "tenderForm",cascade = CascadeType.ALL)
+    private List<Item> items;
 
 }
